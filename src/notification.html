@@ -1,0 +1,22 @@
+<h3>EtherPass: Save Password</h3>
+<form data-bind="submit: saveUser, visible: !showOk()">
+  <div class="form-group">
+    <label>Domain</label>
+    <input type="text" data-bind="value: domain" />
+  </div>
+  <div class="form-group">
+    <label>User</label>
+    <input type="text" data-bind="value: user" />
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" data-bind="value: password" />
+  </div>
+  <div class="text-right">
+    <button data-bind="click: cancel" class="btn btn-default">Cancel</button>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+<div class="alert alert-success" role="alert" data-bind="visible: showOk">
+  Password saved!
+</div>

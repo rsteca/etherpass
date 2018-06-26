@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- ko if: currentPopup() === 'prompt-register' -->
+      <h3>Sign up</h3>
+      <form data-bind="submit: register">
+        <div class="form-group">
+          <label>Private Key</label>
+          <input type="text" data-bind="value: privateKey" />
+        </div>
+        <div class="form-group">
+          <label>Master Password</label>
+          <input type="password" data-bind="value: masterPassword" />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    <!-- /ko -->
+    <!-- ko if: currentPopup() === 'save-user' -->
+      <strong>Public Key <span data-bind="text: publicKey().slice(0, 10) + '...'"></span></strong>
+      <div class="form-group">
+        <select class="custom-select custom-select-sm"
+                data-bind="options: networks, value: selectedNetwork"></select>
+      </div>
+      <button class="btn btn-default" data-bind="click: logout">Logout</button>
+      <hr>
+      <h3>Save Password</h3>
+      <form data-bind="submit: saveUser, visible: !saveSuccess()">
+        <div class="form-group">
+          <label>Domain</label>
+          <input type="text" data-bind="value: domain" required/>
+        </div>
+        <div class="form-group">
+          <label>User</label>
+          <input type="text" data-bind="value: user" required/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" data-bind="value: password" required/>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+      <div class="alert alert-success" role="alert" data-bind="visible: saveSuccess">
+        <strong>Successfully saved to the blockchain!</strong> You will have to wait some minutes till the transaction is confirmed.
+      </div>
+    <!-- /ko -->
+    <!-- ko if: currentPopup() === 'prompt-password' -->
+      <h3>Login</h3>
+      <form data-bind="submit: login">
+        <div class="form-group">
+          <label>Master Password</label>
+          <input type="password" data-bind="value: masterPassword" />
+          <div class="alert alert-danger" role="alert" data-bind="text: loginError, visible: loginError().length"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    <!-- /ko -->
+  </div>
+</body>
+</html>
